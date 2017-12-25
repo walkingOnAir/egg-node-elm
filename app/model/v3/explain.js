@@ -8,8 +8,8 @@ module.exports = app => {
   const explainSchema = new Schema({
     data: Schema.Types.Mixed,
   });
-  
-  explainSchema.index({id: 1});
-  
+
+  explainSchema.index({ id: 1 });
+
   return mongoose.model('Explain', explainSchema);
 };

@@ -10,8 +10,8 @@ module.exports = app => {
     origin: String,
     id: Number,
   });
-  
-  statisSchema.index({id: 1});
-  
+
+  statisSchema.index({ id: 1 });
+
   return mongoose.model('Statis', statisSchema);
 };

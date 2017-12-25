@@ -14,8 +14,8 @@ module.exports = app => {
     promotion: [],
     select_state: Number,
   });
-  
-  paymentsSchema.index({id: 1});
-  
+
+  paymentsSchema.index({ id: 1 });
+
   return mongoose.model('Payments', paymentsSchema);
 };

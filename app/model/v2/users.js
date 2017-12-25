@@ -10,8 +10,8 @@ module.exports = app => {
     username: String,
     password: String,
   });
-  
-  userSchema.index({id: 1});
-  
+
+  userSchema.index({ id: 1 });
+
   return mongoose.model('User', userSchema);
 };

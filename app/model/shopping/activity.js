@@ -11,10 +11,10 @@ module.exports = app => {
     icon_name: String,
     id: Number,
     name: String,
-    ranking_weight: Number
+    ranking_weight: Number,
   });
-  
-  activitySchema.index({id: 1});
-  
+
+  activitySchema.index({ id: 1 });
+
   return mongoose.model('Activity', activitySchema);
 };

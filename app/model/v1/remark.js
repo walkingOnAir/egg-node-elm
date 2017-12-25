@@ -8,8 +8,8 @@ module.exports = app => {
   const remarkSchema = new Schema({
     remarks: [],
   });
-  
-  remarkSchema.index({id: 1});
-  
+
+  remarkSchema.index({ id: 1 });
+
   return mongoose.model('Remark', remarkSchema);
 };

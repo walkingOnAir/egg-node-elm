@@ -6,10 +6,10 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const citySchema = new Schema({
-    data: {}
+    data: {},
   });
-  
-  citySchema.index({id: 1});
-  
+
+  citySchema.index({ id: 1 });
+
   return mongoose.model('Cities', citySchema);
 };

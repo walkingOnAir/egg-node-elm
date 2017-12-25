@@ -9,10 +9,10 @@ module.exports = app => {
     color: String,
     id: Number,
     is_solid: Boolean,
-    text: String
+    text: String,
   });
-  
-  DeliverySchema.index({id: 1});
-  
+
+  DeliverySchema.index({ id: 1 });
+
   return mongoose.model('Delivery', DeliverySchema);
 };

@@ -11,13 +11,13 @@ module.exports = app => {
     password: String,
     id: Number,
     create_time: String,
-    admin: {type: String, default: '管理员'},
-    //1:普通管理、 2:超级管理员
+    admin: { type: String, default: '管理员' },
+    // 1:普通管理、 2:超级管理员
     status: Number,
-    avatar: {type: String, default: 'default.jpg'},
+    avatar: { type: String, default: 'default.jpg' },
     city: String,
   });
-  
-  adminSchema.index({id: 1});
+
+  adminSchema.index({ id: 1 });
   return mongoose.model('Admin', adminSchema);
 };

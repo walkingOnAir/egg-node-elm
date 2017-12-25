@@ -20,15 +20,15 @@ module.exports = app => {
       online_paid_only: String,
       validity_delta: String,
       validity_periods: String,
-      sum_condition: String
+      sum_condition: String,
     },
     limit_map: {},
     status: Number,
     present_status: Number,
     share_status: Number,
   });
-  
-  hongbaoSchema.index({id: 1});
-  
+
+  hongbaoSchema.index({ id: 1 });
+
   return mongoose.model('Hongbao', hongbaoSchema);
 };

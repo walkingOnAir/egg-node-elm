@@ -13,10 +13,10 @@ module.exports = app => {
     link: String,
     image_url: String,
     icon_url: String,
-    title_color: String
+    title_color: String,
   });
-  
-  entrySchema.index({id: 1});
-  
+
+  entrySchema.index({ id: 1 });
+
   return mongoose.model('Entry', entrySchema);
 };

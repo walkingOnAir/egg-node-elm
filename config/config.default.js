@@ -8,11 +8,11 @@ module.exports = appInfo => {
 
   // add your config here
   config.middleware = [];
-  
-  //egg-mongoose
+
+  // egg-mongoose
   config.mongoose = {
     url: 'mongodb://127.0.0.1/elm',
-    options: {}
+    options: {},
   };
 
   return config;

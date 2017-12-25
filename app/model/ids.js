@@ -19,6 +19,6 @@ module.exports = app => {
     admin_id: Number,
     statis_id: Number,
   });
-  
+
   return mongoose.model('Ids', idsSchema);
 };

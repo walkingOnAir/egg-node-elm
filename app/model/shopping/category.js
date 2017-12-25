@@ -18,12 +18,12 @@ module.exports = app => {
         id: Number,
         image_url: String,
         level: Number,
-        name: String
+        name: String,
       },
-    ]
+    ],
   });
-  
-  categorySchema.index({id: 1});
-  
+
+  categorySchema.index({ id: 1 });
+
   return mongoose.model('Category', categorySchema);
 };
