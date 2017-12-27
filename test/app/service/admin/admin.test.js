@@ -6,12 +6,6 @@ const { app, mock, assert } = require('egg-mock/bootstrap');
 const moment = require('moment');
 
 describe('test/app/service/admin/admin.test.js', () => {
-  // before(async function() {
-  //   // 等待app启动成功，才能执行测试用例
-  //   return app.ready();
-  // });
-
-  afterEach(mock.restore);
 
   describe('create()', () => {
     it('should create success', async () => {
