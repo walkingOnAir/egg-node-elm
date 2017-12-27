@@ -2,17 +2,14 @@
  * Created by wangpeng on 2017/12/25.
  */
 'use strict';
-const assert = require('assert');
-const mock = require('egg-mock');
+const { app, mock, assert } = require('egg-mock/bootstrap');
 const moment = require('moment');
 
 describe('test/app/service/admin/admin.test.js', () => {
-  let app;
-  before(async function() {
-    app = mock.app();
-    // 等待app启动成功，才能执行测试用例
-    return app.ready();
-  });
+  // before(async function() {
+  //   // 等待app启动成功，才能执行测试用例
+  //   return app.ready();
+  // });
 
   afterEach(mock.restore);
 
@@ -39,7 +36,7 @@ describe('test/app/service/admin/admin.test.js', () => {
       // 创建ctx
       const ctx = app.mockContext();
       // 通过ctx访问到service
-      const adminUser = await ctx.service.admin.admin.findOneByUsername({ user_name: 'admin' });
+      const adminUser = await ctx.service.admin.admin.findOneByUsername('admin');
       assert(adminUser);
     });
   });
