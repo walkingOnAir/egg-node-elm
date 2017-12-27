@@ -7,7 +7,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1513862025779_6947';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = ['respHeader'];
 
   // egg-mongoose
   config.mongoose = {
