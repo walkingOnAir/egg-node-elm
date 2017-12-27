@@ -12,7 +12,7 @@ class AdminService extends Service {
    * @returns {Promise.<user>}
    */
   async create(user) {
-    return this.ctx.model.Admin.create(user);
+    return this.ctx.model.Admin.Admin.create(user);
   }
 
   /**
@@ -21,7 +21,7 @@ class AdminService extends Service {
    * @returns {Promise.<T|*>}
    */
   async findOneByUsername(username) {
-    return this.ctx.model.Admin.find({ user_name: username });
+    return this.ctx.model.Admin.Admin.find({ user_name: username });
   }
 }
 
