@@ -21,7 +21,7 @@ class AdminService extends Service {
    * @returns {Promise.<T|*>}
    */
   async findOneByUsername(username) {
-    return this.ctx.model.Admin.Admin.find({ user_name: username });
+    return this.ctx.model.Admin.Admin.findOne({ user_name: username });
   }
   
   /**

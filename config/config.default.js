@@ -5,6 +5,13 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1513862025779_6947';
+  
+  //安全策略配置
+  exports.security = {
+    csrf: {
+      enable: false
+    }
+  };
 
   // 中间件配置
   config.middleware = ['respHeader'];
