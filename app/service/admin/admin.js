@@ -30,7 +30,7 @@ class AdminService extends Service {
    * @param offset
    * @returns {Promise.<*>}
    */
-  async getAdminList(limit = 20, offset = 0) {
+  async getAdminList({limit = 20, offset = 0}) {
     return this.ctx.model.Admin.Admin.find({}, {_id: 0, password: 0})
       .sort({id: -1})
       .skip(Number(offset))

@@ -9,35 +9,42 @@ const crypto = require('crypto');
 const moment = require('moment');
 //接口返回状态码
 const CODE = require('../../constant/base/http_res_code');
-//ids type
-const IDS_TYPE = require('../../constant/base/ids');
 
 class BaseController extends Controller {
   
+  //当前页记录数
+  get pageSize() {
+    return 20;
+  }
+  //当前页
+  get page() {
+    return 1;
+  }
+  
   /**
    * 返回成功
-   * @param msg 成功信息
+   * @param message 成功信息
    * @param data 业务数据
    */
-  success( msg = '成功', data = {}) {
+  success( message, data = {}) {
     this.ctx.body = {
       code: CODE.SUCCESS,
       data,
-      msg,
+      msg: message || '成功',
       serverTime: new Date().getTime()
     };
   }
   
   /**
    * 返回失败
-   * @param msg 失败信息
+   * @param message 失败信息
    * @param data 业务数据
    */
-  fail( msg = '失败', data = {}) {
+  fail( message, data = {}) {
     this.ctx.body = {
       code: CODE.FAIL,
       data,
-      msg,
+      msg: message || '失败',
       serverTime: new Date().getTime()
     };
   }
@@ -67,14 +74,7 @@ class BaseController extends Controller {
       this.fail('服务器内部错误');
     }
   }
-  
-  /**
-   * 获取格式化的当前时间
-   * @param formatter
-   */
-  getCurrentTimeWithFormatter(formatter = 'YYYY-MM-DD') {
-    return moment().format(formatter)
-  }
+ 
 }
 
 module.exports = BaseController;
