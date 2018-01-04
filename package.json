@@ -4,11 +4,14 @@
   "description": "node-elm的egg版本实现",
   "private": true,
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "egg": "^2.0.0",
     "egg-mongoose": "^2.1.1",
     "egg-scripts": "^2.1.0",
     "egg-validate": "^1.0.0",
-    "moment": "^2.20.1"
+    "gm": "^1.23.1",
+    "moment": "^2.20.1",
+    "stream-wormhole": "^1.0.3"
   },
   "devDependencies": {
     "autod": "^3.0.1",

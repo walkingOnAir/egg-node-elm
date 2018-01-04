@@ -5,6 +5,10 @@
 'use strict';
 
 const BaseController = require('../base/base_controller');
+const fs = require('fs');
+const path = require('path');
+const awaitWriteStream = require('await-stream-ready').write;
+const sendToWormhole = require('stream-wormhole');
 const IDS_TYPE = require('../../constant/base/ids');
 
 class AdminController extends BaseController {
@@ -145,8 +149,72 @@ class AdminController extends BaseController {
     if (!pageSize) {
       pageSize = this.pageSize;
     }
+    //获取列表
     const adminList = await ctx.service.admin.admin.getAdminList(ctx.helper.getLimitAndOffsetByParams(page, pageSize));
-    this.success('', adminList);
+    //获取总数
+    const count = await ctx.service.admin.admin.getAdminCount();
+    this.success('', {adminList, count});
+  }
+  
+  /**
+   * 获取管理员数量
+   * @returns {Promise.<*>}
+   */
+  async getAdminCount() {
+    const ctx = this.ctx;
+    const count = await ctx.service.admin.admin.getAdminCount();
+    this.success('', count);
+  }
+  
+  /**
+   * 获取管理员信息
+   * @returns {Promise.<void>}
+   */
+  async getAdminInfo() {
+    const ctx = this.ctx;
+    const req = ctx.request;
+    const logger = ctx.logger;
+    let { admin_id } = req.body;
+    try {
+      //校验
+      ctx.validate({
+        admin_id: {type: 'int'}
+      });
+    } catch (err) {
+      logger.warn(err.errors);
+      this.fail(err.errors.map((ele) => {
+        return ele.field + ' ' + ele.message;
+      }).join(','));
+      return;
+    }
+    //获取管理员信息
+    const adminInfo = ctx.service.admin.admin.getAdminInfoById(admin_id);
+    this.success('', adminInfo);
+  }
+  
+  /**
+   * 更新管理员头像
+   * @returns {Promise.<void>}
+   */
+  async updateAvatar() {
+    const ctx = this.ctx;
+    const logger = ctx.logger;
+    const stream = await this.ctx.getFileStream();
+    const filename = encodeURIComponent(stream.fields.name) + path.extname(stream.filename).toLowerCase();
+    const target = path.join(this.config.baseDir, 'app/public', filename);
+    const writeStream = fs.createWriteStream(target);
+    try {
+      //写入硬盘
+      await awaitWriteStream(stream.pipe(writeStream));
+    } catch (err) {
+      //必须将上传的文件流消费掉，要不然浏览器响应会卡死
+      await sendToWormhole(stream);
+      logger.error(err);
+      this.fail('上传头像失败');
+      return;
+    }
+  
+    this.success('', {url: '/public/' + filename});
   }
 }
 
