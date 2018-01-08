@@ -45,7 +45,7 @@ class AdminController extends BaseController {
       const addAdminUser = {
         user_name,
         password: encryPassword,
-        create_time: ctx.getCurrentTimeWithFormatter(),
+        create_time: ctx.helper.getCurrentTimeWithFormatter(),
         admin: adminTip,
         status
       };
@@ -93,7 +93,7 @@ class AdminController extends BaseController {
       const addAdminUser = {
         user_name,
         password: encryPassword,
-        create_time: ctx.getCurrentTimeWithFormatter(),
+        create_time: ctx.helper.getCurrentTimeWithFormatter(),
         admin: adminTip,
         status
       };
