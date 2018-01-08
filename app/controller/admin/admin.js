@@ -9,7 +9,6 @@ const fs = require('fs');
 const path = require('path');
 const awaitWriteStream = require('await-stream-ready').write;
 const sendToWormhole = require('stream-wormhole');
-const IDS_TYPE = require('../../constant/base/ids');
 
 class AdminController extends BaseController {
   
@@ -42,12 +41,10 @@ class AdminController extends BaseController {
     } else {
       //不存在，则添加到数据库中
       const adminTip = status === 1 ? '管理员' : '超级管理员';
-      const adminId = await this.getIdByType(IDS_TYPE.ADMIN_ID);
       const encryPassword = this.encryptOfMd5(password);
       const addAdminUser = {
         user_name,
         password: encryPassword,
-        id: adminId,
         create_time: ctx.getCurrentTimeWithFormatter(),
         admin: adminTip,
         status
@@ -93,11 +90,9 @@ class AdminController extends BaseController {
     if (!adminUser) {
       //不存在此用户，直接注册
       const adminTip = status === 1 ? '管理员' : '超级管理员';
-      const adminId = await this.getIdByType(IDS_TYPE.ADMIN_ID);
       const addAdminUser = {
         user_name,
         password: encryPassword,
-        id: adminId,
         create_time: ctx.getCurrentTimeWithFormatter(),
         admin: adminTip,
         status

@@ -6,7 +6,6 @@
 
 const Controller = require('egg').Controller;
 const crypto = require('crypto');
-const moment = require('moment');
 //接口返回状态码
 const CODE = require('../../constant/base/http_res_code');
 
@@ -59,22 +58,6 @@ class BaseController extends Controller {
     return md5.update(str).digest('base64');
   }
   
-  /**
-   * 根据type获取id
-   * @param type 集合类型
-   * @returns {Promise.<*>}
-   */
-  async getIdByType(type) {
-    const ctx = this.ctx;
-    const id = await ctx.service.base.ids.getIdByType(type);
-    if (id) {
-      return id;
-    } else {
-      ctx.logger.error('id类型数据库错误');
-      this.fail('服务器内部错误');
-    }
-  }
- 
 }
 
 module.exports = BaseController;

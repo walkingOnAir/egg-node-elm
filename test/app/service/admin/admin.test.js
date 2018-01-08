@@ -14,8 +14,7 @@ describe('test/app/service/admin/admin.test.js', () => {
       // 通过ctx访问到service
       const adminUser = await ctx.service.admin.admin.create({
         user_name: 'admin',
-        password: 'admin',
-        id: 1,
+        password: 'from admin.test.js',
         create_time: moment().format('YYYY-MM-DD'),
         admin: '超级管理员',
         status: 2,

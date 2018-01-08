@@ -3,6 +3,7 @@
  */
 'use strict';
 const Service = require('egg').Service;
+const IDS_TYPE = require('../../constant/base/ids');
 
 class AdminService extends Service {
 
@@ -12,7 +13,16 @@ class AdminService extends Service {
    * @returns {Promise.<user>}
    */
   async create(user) {
-    return this.ctx.model.Admin.Admin.create(user);
+    const ctx = this.ctx;
+    //获取管理员待添加id
+    const id = await ctx.service.base.ids.getIdByType(IDS_TYPE.ADMIN_ID);
+    if (id) {
+      user.id = id;
+    } else {
+      ctx.logger.error('管理员id获取失败');
+      return null;
+    }
+    return ctx.model.Admin.Admin.create(user);
   }
 
   /**
