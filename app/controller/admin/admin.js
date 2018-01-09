@@ -194,22 +194,24 @@ class AdminController extends BaseController {
   async updateAvatar() {
     const ctx = this.ctx;
     const logger = ctx.logger;
-    const stream = await this.ctx.getFileStream();
-    const filename = encodeURIComponent(stream.fields.name) + path.extname(stream.filename).toLowerCase();
-    const target = path.join(this.config.baseDir, 'app/public', filename);
-    const writeStream = fs.createWriteStream(target);
     try {
-      //写入硬盘
-      await awaitWriteStream(stream.pipe(writeStream));
+      //上传头像，获取上传路径
+      const {id, url} = await this.upload();
+      if (!id) {
+        this.fail('id参数不正确');
+        return;
+      }
+      //更新头像路径
+      const adminInfo = await ctx.service.admin.admin.updateAdminAvatar(id, url);
+      if (!adminInfo) {
+        this.fail('更新头像失败');
+        return;
+      }
+      this.success('更新头像成功', {url});
     } catch (err) {
-      //必须将上传的文件流消费掉，要不然浏览器响应会卡死
-      await sendToWormhole(stream);
       logger.error(err);
-      this.fail('上传头像失败');
-      return;
     }
-  
-    this.success('', {url: '/public/' + filename});
+    
   }
 }
 

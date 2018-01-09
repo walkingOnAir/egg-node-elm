@@ -114,7 +114,8 @@ describe('test/app/controller/admin/admin.test.js', () => {
     it('should update admin user avatar', async () => {
       return app.httpRequest()
         .post('/updateAvatar')
-        .field('name', 'update_avatar')
+        .field('id', 19)
+        .field('name', 'test')
         .attach('file', path.join(__dirname, 'update_avatar.jpg'))
         .expect(200)
         .expect((res) => {
