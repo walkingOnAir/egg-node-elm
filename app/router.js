@@ -12,4 +12,5 @@ module.exports = app => {
   router.post('/getAdminCount', controller.admin.admin.getAdminCount);
   router.post('/getAdminInfo', controller.admin.admin.getAdminInfo);
   router.post('/updateAvatar', controller.admin.admin.updateAvatar);
+  router.post('/hongbaoHandle', controller.promotion.hongbao.hongbaoHandle);
 };
